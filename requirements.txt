@@ -1,5 +1,5 @@
 streamlit
-pil
+Pillow
 requests
 io
 termcolor
