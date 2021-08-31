@@ -23,7 +23,7 @@ if uploaded_file is not None:
     #     f.write(img_byte_arr)
 
     # api call
-    url = "http://localhost:8000/uploadfile"
+    url = "http://localhost:8080/uploadfile"
     files = {"file": img_byte_arr}
 
     response = requests.post(url, files=files)
