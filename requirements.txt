@@ -1,5 +1,4 @@
 streamlit
 Pillow
 requests
-io
 termcolor
