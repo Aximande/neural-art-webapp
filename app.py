@@ -58,3 +58,5 @@ if uploaded_file is not None:
     for i, v in enumerate(
         list(data.sort_values("Prediction", ascending=False).Prediction)):
         ax.text(v, i, "{0:.0%}".format(v), color='black', fontweight='bold')
+
+    st.pyplot(fig)
