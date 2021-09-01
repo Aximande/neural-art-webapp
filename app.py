@@ -68,17 +68,31 @@ if uploaded_file is not None:
             x="Prediction",
             order=data.sort_values("Prediction", ascending=False).Movement,
             ax=ax,dodge=False)
-    ax.set_ylabel("Art Style", loc='top', rotation='horizontal')
-    ax.set_ylim((-2,5))
+    ax.set_ylabel("Art Style",
+                  loc='top',
+                  rotation='horizontal',
+                  color="#FF4500")
+    ax.set_xlabel('Prediction value (%)', color="#FF4500")
+    ax.set_ylim((-2, 5))
+    ax.spines["bottom"].set_color("#FF4500")
+    ax.spines["left"].set_color("#FF4500")
+    #ax.yaxis.label.set_color('#FF4500')
+    ax.tick_params(axis='y', colors='#FF4500')
+
     for label in ax.get_yticklabels():
         label.set_fontweight('bold')
     despine()
 
     for i, v in enumerate(
         list(data.sort_values("Prediction", ascending=False).Prediction)):
-        ax.text(v, i, "{0:.0%}".format(v), color='black', fontweight='bold')
+        ax.text(v,
+                i,
+                "{0:.0%}".format(v),
+                color='black',
+                fontweight='bold',
+                horizontalalignment='right')
 
-    st.pyplot(fig)
+    st.pyplot(fig, transparent=True,)
 
 st.markdown('Like it ? Want to know more ? Click below')
 if st.button('View Source Code on Git'):
