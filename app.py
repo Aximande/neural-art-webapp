@@ -4,7 +4,7 @@ import requests
 import io
 
 st.set_option("deprecation.showfileUploaderEncoding", False)
-uploaded_file = st.file_uploader("Choose an image", type="png")
+uploaded_file = st.file_uploader("Choose an image", type= ['png','jpg'])
 
 if uploaded_file is not None:
 
