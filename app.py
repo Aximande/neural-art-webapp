@@ -2,13 +2,12 @@ import streamlit as st
 from PIL import Image
 import requests
 import io
-from seaborn import barplot,set_theme,despine
+from seaborn import barplot,set_theme,despine,set_style
 import pandas as pd
 import matplotlib.pyplot as plt
 import webbrowser
 
 github_url = 'https://github.com/gregoirelafay/neural-art'
-
 
 
 st.set_option("deprecation.showfileUploaderEncoding", False)
@@ -27,7 +26,9 @@ if uploaded_file is not None:
     # uploaded_file
 
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded image", use_column_width='auto')
+    col1, col2, col3 = st.columns([2, 4, 2])
+    with col2:
+        st.image(image, caption="Uploaded image", use_column_width='auto')
 
     # convert image to bytes
     img_byte_arr = io.BytesIO()
@@ -59,14 +60,18 @@ if uploaded_file is not None:
     data.set_index("Movement")
 
     set_theme(style="darkgrid", palette="Set2", context="poster")
+    set_style(style='white')
 
     fig, ax = plt.subplots(1, 1, figsize=(14, 8))
     barplot(data=data,
             y="Movement",
             x="Prediction",
             order=data.sort_values("Prediction", ascending=False).Movement,
-            ax=ax)
-    ax.set_ylabel("Art Style")
+            ax=ax,dodge=False)
+    ax.set_ylabel("Art Style", loc='top', rotation='horizontal')
+    ax.set_ylim((-2,5))
+    for label in ax.get_yticklabels():
+        label.set_fontweight('bold')
     despine()
 
     for i, v in enumerate(
