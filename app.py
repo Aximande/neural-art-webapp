@@ -15,7 +15,7 @@ if uploaded_file is not None:
     # uploaded_file
 
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded image", use_column_width=False)
+    st.image(image, caption="Uploaded image", use_column_width='auto')
 
     # convert image to bytes
     img_byte_arr = io.BytesIO()
