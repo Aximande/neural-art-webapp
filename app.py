@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 st.set_option("deprecation.showfileUploaderEncoding", False)
+st.title('My title')
 uploaded_file = st.file_uploader("Choose an image", type= ['png','jpg','jpeg'])
 
 if uploaded_file is not None:
