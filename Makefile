@@ -55,4 +55,4 @@ pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
 
 run_streamlit:
-	@streamlit run scripts/app.py
+	@streamlit run app.py

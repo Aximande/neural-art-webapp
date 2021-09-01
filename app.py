@@ -5,9 +5,20 @@ import io
 from seaborn import barplot,set_theme,despine
 import pandas as pd
 import matplotlib.pyplot as plt
+import webbrowser
+
+github_url = 'https://github.com/gregoirelafay/neural-art'
+
+
 
 st.set_option("deprecation.showfileUploaderEncoding", False)
-st.title('My title')
+st.title('Neural Art')
+logo_wagon = Image.open('wagon.png')
+st.image(logo_wagon,width=75)
+
+st.header("Let's play, can we predict  the Art Style of your painting ?")
+st.markdown('Upload below an image, or take one with your phone')
+
 uploaded_file = st.file_uploader("Choose an image", type= ['png','jpg','jpeg'])
 
 if uploaded_file is not None:
@@ -32,6 +43,8 @@ if uploaded_file is not None:
     files = {"file": img_byte_arr}
 
     response = requests.post(url, files=files)
+
+    st.markdown('Here is our prediction for your image')
 
     if response.status_code == 200:
         resp = response.json()
@@ -61,3 +74,7 @@ if uploaded_file is not None:
         ax.text(v, i, "{0:.0%}".format(v), color='black', fontweight='bold')
 
     st.pyplot(fig)
+
+st.markdown('Like it ? Want to know more ? Click below')
+if st.button('View Source Code on Git'):
+    webbrowser.open_new_tab(github_url)
