@@ -55,7 +55,7 @@ if uploaded_file is not None:
     data = resp["pred"]
 
     data = eval(data)
-    data = {i: j for i, j in data.items() if j > 0.1}
+    data = {i: j for i, j in data.items() if j > 0.01}
     data = pd.DataFrame(list(data.items()), columns=["Movement", "Prediction"])
     data.set_index("Movement")
 
@@ -66,7 +66,7 @@ if uploaded_file is not None:
     barplot(data=data,
             y="Movement",
             x="Prediction",
-            order=data.sort_values("Prediction", ascending=False).Movement,
+            order=data.sort_values("Prediction", ascending=True).Movement,
             ax=ax,dodge=False)
     ax.set_ylabel("Art Style",
                   loc='top',
@@ -84,7 +84,7 @@ if uploaded_file is not None:
     despine()
 
     for i, v in enumerate(
-        list(data.sort_values("Prediction", ascending=False).Prediction)):
+        list(data.sort_values("Prediction", ascending=True).Prediction)):
         ax.text(v,
                 i,
                 "{0:.0%}".format(v),
@@ -94,6 +94,21 @@ if uploaded_file is not None:
 
     st.pyplot(fig, transparent=True,)
 
+st.text("")
+st.text("")
+st.text("")
+st.markdown("Context for your prediction:")
+st.markdown("   - We collected a dataset (thanks WikiArt) of 40.000 images split in 8 different Art Styles (class):")
+st.markdown("       - Our input (X) is strictly images ! ")
+st.markdown("       - you can find below the split between our 8 class")
+split_movement_png = Image.open('class_split_2.png')
+st.image(split_movement_png, width=500)
+st.markdown("   - We trained a custom Convolutional Neural Network Models (see our repo on github)")
+st.markdown("       - Our output (Y) is probability number for our 8 different Art Styles")
+st.markdown("       - That's why you may see multiple predicions for your painting")
+
+st.text("")
 st.markdown('Like it ? Want to know more ? Click below')
-if st.button('View Source Code on Git'):
+
+if st.button('View Source Code on Github'):
     webbrowser.open_new_tab(github_url)
