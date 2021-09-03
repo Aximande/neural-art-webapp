@@ -6,6 +6,7 @@ from seaborn import barplot,set_theme,despine,set_style
 import pandas as pd
 import matplotlib.pyplot as plt
 import webbrowser
+import time
 
 github_url = 'https://github.com/gregoirelafay/neural-art'
 
@@ -19,6 +20,7 @@ st.header("Let's play, can we predict  the Art Style of your painting ?")
 st.markdown('Upload below an image, or take one with your phone')
 
 uploaded_file = st.file_uploader("Choose an image", type= ['png','jpg','jpeg'])
+
 
 if uploaded_file is not None:
 
@@ -97,15 +99,19 @@ if uploaded_file is not None:
 st.text("")
 st.text("")
 st.text("")
-st.markdown("Context for your prediction:")
-st.markdown("   - We collected a dataset (thanks WikiArt) of 40.000 images split in 8 different Art Styles (class):")
-st.markdown("       - Our input (X) is strictly images ! ")
-st.markdown("       - you can find below the split between our 8 class")
-split_movement_png = Image.open('class_split_2.png')
-st.image(split_movement_png, width=500)
-st.markdown("   - We trained a custom Convolutional Neural Network Models (see our repo on github)")
-st.markdown("       - Our output (Y) is probability number for our 8 different Art Styles")
-st.markdown("       - That's why you may see multiple predicions for your painting")
+check1 = st.button("Explanations")
+
+
+if check1:
+    st.markdown("Context for your prediction:")
+    st.markdown("   - We collected a dataset (thanks WikiArt) of 40.000 images split in 8 different Art Styles (class):")
+    st.markdown("       - Our input (X) is strictly images ! ")
+    st.markdown("       - you can find below the split between our 8 class")
+    split_movement_png = Image.open('class_split_2.png')
+    st.image(split_movement_png, use_column_width=True)
+    st.markdown("   - We trained a custom Convolutional Neural Network Models (see our repo on github)")
+    st.markdown("       - Our output (Y) is probability number for our 8 different Art Styles")
+    st.markdown("       - That's why you may see multiple predicions for your painting")
 
 st.text("")
 st.markdown('Like it ? Want to know more ? Click below')
